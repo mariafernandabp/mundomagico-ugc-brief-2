@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Brief Creador — Mundo Mágico × LA REAL</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F5F0EB; --ink:#14201c; --muted:#6b7280; --line:rgba(13,27,42,0.1);
+    --green:#16a34a; --navy:#0D1B2A; --card:#fff;
+    --red-bg:#FEE2E2; --red-ink:#991B1B; --green-bg:#DCFCE7; --green-ink:#166534;
+    --yellow-bg:#FEF3C7; --yellow-ink:#92400E; --blue-bg:#DBEAFE;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{font-family:'Inter',sans-serif; background:var(--bg); color:var(--ink); line-height:1.5; -webkit-font-smoothing:antialiased;}
+
+  /* Hero */
+  .hero{background:var(--navy); position:relative; overflow:hidden; padding:70px 24px 60px; text-align:center;}
+  .hero::before{content:''; position:absolute; inset:0; background:radial-gradient(ellipse at 30% 20%, rgba(74,222,128,0.08) 0%, transparent 60%); pointer-events:none;}
+  .hero-content{position:relative; z-index:1; max-width:700px; margin:0 auto;}
+  .hero-badge{display:inline-flex; align-items:center; gap:8px; padding:10px 22px; border-radius:50px; background:rgba(74,222,128,0.08); border:1px solid rgba(74,222,128,0.25); color:#4ADE80; font-size:12px; font-weight:700; letter-spacing:2px; text-transform:uppercase; margin-bottom:28px;}
+  .hero-badge-dot{width:7px; height:7px; border-radius:50%; background:#4ADE80; display:inline-block;}
+  .hero h1{color:#fff; font-size:56px; font-weight:900; letter-spacing:-1.5px; line-height:1.1; margin-bottom:16px;}
+  .hero h1 .accent{color:#4ADE80;}
+  .hero-subtitle{color:#94A3B8; font-size:18px; font-weight:500; margin-bottom:40px;}
+  .hero-meta{display:flex; justify-content:center; gap:56px; flex-wrap:wrap;}
+  .hero-meta-item{text-align:center;}
+  .hero-meta-label{font-size:11px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:#64748B; margin-bottom:8px;}
+  .hero-meta-value{font-size:16px; font-weight:800; color:#fff;}
+
+  .wrap{max-width:820px; margin:0 auto; padding:40px 24px 100px;}
+
+  /* Card sections */
+  .card-section{background:#fff; border-radius:24px; padding:40px; margin-top:24px; box-shadow:0 1px 3px rgba(0,0,0,.04), 0 8px 24px rgba(0,0,0,.04);}
+  .card-tag{display:inline-block; background:var(--green-bg); color:var(--green-ink); font-size:11px; font-weight:800; letter-spacing:1.5px; text-transform:uppercase; padding:8px 18px; border-radius:50px; margin-bottom:20px;}
+  .card-title{font-size:28px; font-weight:900; letter-spacing:-0.5px; margin-bottom:18px; color:var(--ink);}
+
+  p.body-text{font-size:15.5px; color:#374151; line-height:1.65; margin-bottom:10px;}
+  p.body-text strong{color:var(--ink);}
+
+  /* Pago destacado */
+  .pay-box{background:var(--navy); border-radius:18px; padding:30px 28px; display:flex; gap:40px; flex-wrap:wrap; align-items:center;}
+  .pay-item-label{font-size:12px; color:#94A3B8; text-transform:uppercase; letter-spacing:1px; margin-bottom:6px; font-weight:600;}
+  .pay-item-value{font-size:30px; font-weight:900; color:#4ADE80; letter-spacing:-1px;}
+  .pay-item-value.white{color:#fff;}
+
+  /* Specs grid */
+  .specs-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:14px;}
+  .spec-card{background:var(--bg); border-radius:12px; padding:18px 20px; display:flex; align-items:center; gap:14px;}
+  .spec-icon{width:34px; height:34px; border-radius:9px; background:var(--blue-bg); display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0;}
+  .spec-label{font-size:11.5px; color:var(--muted); text-transform:uppercase; letter-spacing:.5px; margin-bottom:2px; font-weight:600;}
+  .spec-value{font-size:14.5px; font-weight:700; color:var(--ink);}
+  .spec-note{grid-column:1/-1; background:var(--yellow-bg); color:var(--yellow-ink); border-radius:12px; padding:14px 18px; font-size:13.5px; font-weight:600;}
+  .spec-important{grid-column:1/-1; background:var(--green-bg); border:2px solid var(--green); border-radius:14px; padding:20px 22px; display:flex; gap:16px; align-items:flex-start;}
+  .spec-important-icon{width:38px; height:38px; border-radius:10px; background:#fff; display:flex; align-items:center; justify-content:center; font-size:18px; flex-shrink:0;}
+  .spec-important-title{color:var(--green-ink); font-weight:800; font-size:15px; margin-bottom:6px;}
+  .spec-important-text{color:#374151; font-size:14px; line-height:1.6;}
+  .spec-important-text strong{color:var(--ink);}
+
+  /* Contenido cards */
+  .content-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:14px;}
+  .content-card{background:var(--bg); border-radius:12px; padding:18px 20px; border-left:4px solid var(--green);}
+  .content-name{font-size:14.5px; font-weight:800; margin-bottom:6px;}
+  .content-num{display:inline-flex; align-items:center; justify-content:center; width:22px; height:22px; background:var(--green-bg); color:var(--green-ink); border-radius:6px; font-size:12px; font-weight:800; margin-right:8px; vertical-align:middle;}
+  .content-desc{font-size:13.5px; color:#374151; line-height:1.5;}
+
+  /* Referencias */
+  .ref-list{display:flex; flex-wrap:wrap; gap:10px;}
+  .ref-pill{background:var(--bg); border:1px solid var(--line); border-radius:50px; padding:8px 16px; font-size:13.5px; font-weight:600;}
+
+  /* Tono */
+  .tono-row{display:flex; gap:10px; flex-wrap:wrap; margin-bottom:16px;}
+  .tono-tag{background:var(--navy); color:#4ADE80; font-size:12.5px; font-weight:700; padding:8px 16px; border-radius:50px; letter-spacing:.3px;}
+  .frase-box{background:var(--bg); border-radius:12px; padding:16px 20px; margin-bottom:10px; font-size:14px;}
+  .frase-box.permitida{border-left:4px solid var(--green);}
+  .frase-box.prohibida{border-left:4px solid #DC2626;}
+  .frase-label{font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:1px; margin-bottom:4px;}
+  .frase-box.permitida .frase-label{color:var(--green-ink);}
+  .frase-box.prohibida .frase-label{color:var(--red-ink);}
+
+  /* Dos and donts */
+  .dd-grid{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
+  .dd-col{border-radius:14px; padding:20px;}
+  .dd-col.si{background:var(--green-bg);}
+  .dd-col.no{background:var(--red-bg);}
+  .dd-title{font-size:13px; font-weight:800; text-transform:uppercase; letter-spacing:1px; margin-bottom:12px;}
+  .dd-col.si .dd-title{color:var(--green-ink);}
+  .dd-col.no .dd-title{color:var(--red-ink);}
+  .dd-item{font-size:13.5px; line-height:1.5; margin-bottom:8px; padding-left:18px; position:relative; color:#374151;}
+  .dd-col.si .dd-item::before{content:'✓'; position:absolute; left:0; color:var(--green-ink); font-weight:800;}
+  .dd-col.no .dd-item::before{content:'✗'; position:absolute; left:0; color:var(--red-ink); font-weight:800;}
+  .ref-pill a{color:var(--ink); text-decoration:none;}
+  .content-card.wide{grid-column:1/-1;}
+  .prod-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:12px;}
+  .prod-card{background:var(--bg); border-radius:12px; padding:16px 18px; text-decoration:none; color:var(--ink); display:flex; flex-direction:column; gap:4px; border:1px solid transparent; transition:border-color .2s ease;}
+  .prod-card:hover{border-color:var(--green);}
+  .prod-name{font-size:14px; font-weight:800; line-height:1.3;}
+  .prod-price{font-size:15px; font-weight:900; color:var(--green);}
+  .prod-price s{font-size:12px; color:var(--muted); font-weight:600; margin-left:4px;}
+  .prod-age{font-size:12px; color:var(--muted); font-weight:600;}
+  .prod-feat{font-size:12.5px; color:#374151; line-height:1.45; margin-top:4px;}
+  .prod-girl{align-self:flex-start; background:#FCE7F3; color:#9D174D; font-size:10.5px; font-weight:800; letter-spacing:.8px; text-transform:uppercase; padding:4px 10px; border-radius:50px; margin-bottom:4px;}
+  .prod-link{font-size:12px; font-weight:700; color:var(--green-ink); margin-top:6px;}
+  .legal-note{margin-top:14px; font-size:12.5px; color:var(--muted); font-style:italic;}
+
+  /* Proceso timeline */
+  .timeline{display:flex; flex-direction:column;}
+  .tl-item{display:flex; gap:18px; padding:14px 0; border-bottom:1px solid var(--line);}
+  .tl-item:last-child{border-bottom:none;}
+  .tl-num{flex-shrink:0; width:28px; height:28px; background:var(--green-bg); color:var(--green-ink); border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:12.5px; font-weight:800;}
+  .tl-date{font-size:11.5px; font-weight:700; color:var(--green); letter-spacing:.5px; text-transform:uppercase; margin-bottom:2px;}
+  .tl-desc{font-size:14px; color:#374151;}
+
+  /* Entrega */
+  .entrega-box{background:var(--navy); border-radius:20px; padding:32px 30px; color:#fff;}
+  .entrega-sublabel{font-size:14px; font-weight:600; color:#94A3B8; margin-bottom:14px;}
+  .entrega-link{display:flex; align-items:center; gap:16px; background:rgba(255,255,255,0.06); border-radius:14px; padding:18px 20px; text-decoration:none; margin-bottom:28px; transition:background .2s ease;}
+  .entrega-link:hover{background:rgba(255,255,255,0.1);}
+  .entrega-link-icon{width:42px; height:42px; border-radius:10px; background:#4285F4; display:flex; align-items:center; justify-content:center; font-size:19px; flex-shrink:0;}
+  .entrega-link-title{font-size:15.5px; font-weight:800; color:#fff;}
+  .entrega-link-sub{font-size:13px; color:#94A3B8; margin-top:3px;}
+  .entrega-files-box{background:rgba(255,255,255,0.06); border-radius:14px; padding:18px 20px;}
+  .entrega-file-line{font-family:'Courier New',monospace; color:#4ADE80; font-size:13.5px; line-height:1.9; display:block;}
+
+  /* CTA band */
+  .cta-band{background:var(--navy); border-radius:24px; padding:56px 30px; text-align:center; margin-top:24px;}
+  .cta-band-title{color:#fff; font-size:30px; font-weight:900; letter-spacing:-0.5px; margin-bottom:10px;}
+  .cta-band-sub{color:#94A3B8; font-size:15px; margin-bottom:28px;}
+  .cta-btn-whatsapp-big{display:inline-flex; align-items:center; gap:10px; background:#25D366; color:#fff; font-size:16px; font-weight:800; padding:16px 34px; border-radius:50px; text-decoration:none; transition:all .2s ease;}
+  .cta-btn-whatsapp-big:hover{filter:brightness(1.05);}
+  .cta-btn.contrato{background:var(--navy); color:#fff; display:inline-flex; align-items:center; gap:10px; padding:14px 28px; border-radius:50px; font-size:14.5px; font-weight:700; text-decoration:none; margin-top:16px;}
+
+  footer{margin-top:40px; padding-top:24px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;}
+  .foot-brand{font-size:13px; font-weight:700; color:var(--ink);}
+  .foot-contact{font-size:12.5px; color:var(--muted);}
+
+  @media (max-width:700px){
+    .hero{padding:50px 20px 40px;}
+    .hero h1{font-size:34px;}
+    .hero-subtitle{font-size:15px; margin-bottom:28px;}
+    .hero-meta{gap:28px;}
+    .wrap{padding:32px 18px 80px;}
+    .card-section{padding:26px 22px;}
+    .card-title{font-size:22px;}
+    .specs-grid, .content-grid, .dd-grid, .prod-grid{grid-template-columns:1fr;}
+    .pay-box{gap:24px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-content">
+    <div class="hero-badge"><span class="hero-badge-dot"></span> Brief para creador</div>
+    <h1>Mundo Mágico <span class="accent">×</span> UGC</h1>
+    <p class="hero-subtitle">Segunda tanda · Todo lo que necesitas para crear contenido increíble</p>
+    <div class="hero-meta">
+      <div class="hero-meta-item"><div class="hero-meta-label">Marca</div><div class="hero-meta-value">Mundo Mágico</div></div>
+      <div class="hero-meta-item"><div class="hero-meta-label">Producto</div><div class="hero-meta-value">Selección de juguetes</div></div>
+      <div class="hero-meta-item"><div class="hero-meta-label">Contacto</div><div class="hero-meta-value">LA REAL</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <div class="card-section">
+    <div class="card-tag">Sobre la marca</div>
+    <div class="card-title">Mundo Mágico en 30 segundos</div>
+    <p class="body-text"><strong>Mundo Mágico</strong> es la juguetería online que lleva el juguete que tu hijo quiere hasta tu casa, en cualquier parte de Colombia. Tiene bicicletas, patines, scooters, montables, cocinas infantiles, muñecas reborn, casas de muñecas y mucho más. Y no es solo online: también tiene <strong>15 tiendas físicas</strong> en Medellín, Cali, Montería, Soledad y Apartadó.</p>
+    <p class="body-text">Lo que la hace diferente: cuenta con <strong>todos los medios de pago</strong> o la opción de <strong>pagar a cuotas sin tarjeta de crédito</strong> (con Addi o Sistecrédito), tiene <strong>envío gratis a todo Colombia desde $230.000</strong> y <strong>más de 26.000 familias</strong> ya confiaron en ella. Su personalidad: <strong>mágica, confiable y divertida</strong>. Su slogan: <strong>“Saca tu magia”</strong>.</p>
+  </div>
+
+  <div class="card-section">
+    <div class="card-tag">Especificaciones</div>
+    <div class="card-title">Formato técnico</div>
+    <div class="specs-grid">
+      <div class="spec-card"><div class="spec-icon">⏱️</div><div><div class="spec-label">Duración</div><div class="spec-value">30-90 segundos</div></div></div>
+      <div class="spec-card"><div class="spec-icon">📱</div><div><div class="spec-label">Orientación</div><div class="spec-value">Vertical 9:16</div></div></div>
+      <div class="spec-card"><div class="spec-icon">🎥</div><div><div class="spec-label">Resolución</div><div class="spec-value">Mínimo 1080p</div></div></div>
+      <div class="spec-card"><div class="spec-icon">🎵</div><div><div class="spec-label">Audio</div><div class="spec-value">Voz clara + música solo libre de derechos</div></div></div>
+      <div class="spec-note">💡 Graba en tu casa real, con buena luz natural. No hace falta un set de lujo: queremos un hogar colombiano de verdad. Nada de filtros de belleza exagerados.</div>
+      <div class="spec-important">
+        <div class="spec-important-icon">📁</div>
+        <div>
+          <div class="spec-important-title">Importante: Necesitamos el RAW</div>
+          <div class="spec-important-text">Además del video editado, <strong>es obligatorio entregar todo el material crudo (raw footage)</strong> sin editar. Esto nos permite hacer versiones adicionales y adaptaciones para diferentes formatos.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-section">
+    <div class="card-tag">El contenido</div>
+    <div class="card-title">Tipos de videos que buscamos</div>
+    <div class="content-grid">
+      <div class="content-card"><div class="content-name"><span class="content-num">1</span>😮‍💨 Del “ya no sé cómo entretenerlo” a horas de juego</div><div class="content-desc">Arranca con <strong>el problema</strong>: eres una mamá que no sabe cómo mantener entretenido a su hijo sin pantallas. Gancho: <em>“¿A ustedes también les pasa que ya no saben cómo entretenerlo sin el celular?”</em>. Luego llega <strong>la solución</strong>: le das su juguete de Mundo Mágico y grabas su <strong>reacción real</strong> al recibirlo. Muestra los detalles del juguete en funcionamiento y cierra contando, desde tu experiencia, que ahora <strong>puede pasar horas entretenido</strong>.</div></div>
+      <div class="content-card"><div class="content-name"><span class="content-num">2</span>🤯 No sabía que un juguete podía hacer esto</div><div class="content-desc">Abre el video con <strong>la función más sorprendente</strong> del juguete, con tu hijo usándola: la muñeca que ronca, el fregadero con agua de verdad, el humo del scooter, la excavadora que gira 360°… Gancho: <em>“No sabía que un juguete podía hacer esto.”</em></div></div>
+      <div class="content-card"><div class="content-name"><span class="content-num">3</span>🟩 Guía de regalos: te ayudo a escoger</div><div class="content-desc">Graba con el <strong>efecto de pantalla verde</strong> (TikTok o Reels), con las opciones de la web de Mundo Mágico detrás de ti. Recomienda según la edad y lo que le gusta al niño: <em>“Si le encanta jugar a ser grande… si quiere estar afuera… si ama cuidar bebés…”</em>. Cierra cambiando a una toma real en tu casa y muestra <strong>con cuál te quedaste</strong>, con tu hijo jugando.</div></div>
+      <div class="content-card"><div class="content-name"><span class="content-num">4</span>⭐ Reseña honesta: ¿vale la pena?</div><div class="content-desc">Cuenta tu experiencia real: <em>“Tenía mis dudas de comprar juguetes por internet…”</em>. Muestra <strong>la calidad de cerca</strong>, qué trae la caja y a tu hijo jugando. Cierra con los datos de confianza: más de 26 mil familias, 15 tiendas físicas y todos los medios de pago.</div></div>
+      <div class="content-card"><div class="content-name"><span class="content-num">5</span>🧠 Juega, aprende y suelta las pantallas</div><div class="content-desc">Cuenta cómo el juguete <strong>lo estimula, le enseña algo y lo saca de las pantallas</strong>: cocinar, hacer mercado y contar, construir, cuidar a su bebé o moverse afuera. Muestra a tu hijo concentrado jugando y habla de lo que tú misma has visto en él. Gancho: <em>“Como mamá, siempre estoy buscando juguetes que mantengan entretenido a mi hijo, pero que también le ayuden a aprender algo.”</em></div></div>
+      <div class="content-card"><div class="content-name"><span class="content-num">6</span>💳 Pídelo hoy y págalo a cuotas</div><div class="content-desc">Directo a la compra: muestra el juguete funcionando y di el <strong>precio y la cuota sin rodeos</strong> (te los confirmamos antes de grabar). Cuenta que puedes pagarlo con Addi o Sistecrédito <strong>sin tarjeta de crédito</strong>, o con cualquier medio de pago, y que el envío es gratis a toda Colombia <strong>desde $230.000</strong>. Cierra con: <em>“Pídelo hoy y págalo en cuotas. Saca tu magia.”</em></div></div>
+    </div>
+    <p class="body-text" style="margin-top:18px;">Te asignaremos <strong>el tipo de contenido para cada uno de tus videos</strong>. No tienes que grabarlos todos. Lo que más funciona para Mundo Mágico es ver <strong>el juguete funcionando, con un niño jugando de verdad</strong>.</p>
+    <div class="spec-note" style="margin-top:14px;">🗓️ Todo el contenido es <strong>atemporal</strong>: no menciones Navidad, cumpleaños con fecha, temporadas ni fechas especiales.</div>
+  </div>
+
+  <div class="card-section">
+    <div class="card-tag">Escoge tu juguete</div>
+    <div class="card-title">Productos disponibles</div>
+    <p class="body-text" style="margin-bottom:18px;">Escoge el juguete que más le guste a tu hijo o hija, según su edad y lo que le emociona, y <strong>cuéntanos por WhatsApp cuál escogiste</strong>. Toca cada producto para verlo en la tienda.</p>
+    <div class="prod-grid">
+      <a class="prod-card" href="https://mundomagico.com.co/products/muneca-reborn-gestos" target="_blank"><span class="prod-girl">Solo si tienes niña</span><div class="prod-name">Muñeca Bebé Real Gestos 55 cm</div><div class="prod-price">$260.000</div><div class="prod-age">Desde 3 años</div><div class="prod-feat">Habla, canta, ríe, cuenta cuentos y ronca cuando duerme. Mueve cabeza, boca y manos.</div><div class="prod-link">Ver producto →</div></a>
+      <a class="prod-card" href="https://mundomagico.com.co/products/set-cocina-115-piezas" target="_blank"><span class="prod-girl">Solo si tienes niña</span><div class="prod-name">Set de Cocina Completa 115 Piezas</div><div class="prod-price">$280.000</div><div class="prod-age">Desde 3 años</div><div class="prod-feat">Luces, sonidos y efecto de vapor. Fregadero con agua que circula de verdad.</div><div class="prod-link">Ver producto →</div></a>
+      <a class="prod-card" href="https://mundomagico.com.co/products/casa-muneca-maleta" target="_blank"><span class="prod-girl">Solo si tienes niña</span><div class="prod-name">Casa de Muñecas Tipo Maleta</div><div class="prod-price">$161.000<s>$230.000</s></div><div class="prod-age">Desde 3 años</div><div class="prod-feat">Se cierra y se lleva como maleta. Muñeca articulada y más de 60 accesorios.</div><div class="prod-link">Ver producto →</div></a>
+      <a class="prod-card" href="https://mundomagico.com.co/products/supermercado-jumbo-1" target="_blank"><div class="prod-name">Supermercado Infantil 76 Piezas</div><div class="prod-price">$200.000</div><div class="prod-age">Desde 3 años</div><div class="prod-feat">Carrito, escáner con luces y sonido, y caja registradora con pantalla.</div><div class="prod-link">Ver producto →</div></a>
+      <a class="prod-card" href="https://mundomagico.com.co/products/mesa-de-herramientas-para-ninos" target="_blank"><div class="prod-name">Mesa de Herramientas 69 Piezas</div><div class="prod-price">$130.000</div><div class="prod-age">Desde 3 años</div><div class="prod-feat">Taladro de juguete, martillo, serrucho y más. Mesa que se vuelve maletín.</div><div class="prod-link">Ver producto →</div></a>
+      <a class="prod-card" href="https://mundomagico.com.co/products/mula-mas-retro-a-control-remoto" target="_blank"><div class="prod-name">Mula + Excavadora a Control Remoto</div><div class="prod-price">$200.000</div><div class="prod-age">Desde 5 años</div><div class="prod-feat">Excavadora con giro 360°, un solo control para los dos y batería recargable USB.</div><div class="prod-link">Ver producto →</div></a>
+      <a class="prod-card" href="https://mundomagico.com.co/products/scooter-humo" target="_blank"><div class="prod-name">Scooter Humo para Niñas y Niños</div><div class="prod-price">$230.000</div><div class="prod-age">De 3 a 5 años</div><div class="prod-feat">Efecto de humo, luces LED, música por Bluetooth y manubrio ajustable 65-75 cm.</div><div class="prod-link">Ver producto →</div></a>
+      <a class="prod-card" href="https://mundomagico.com.co/products/patin-4-llantas-ajustables" target="_blank"><span class="prod-girl">Solo si tienes niña</span><div class="prod-name">Patines Semiprofesionales para Niña</div><div class="prod-price">$180.000</div><div class="prod-age">Tallas 34 a 41</div><div class="prod-feat">4 llantas en línea con luces LED y estructura con aluminio.</div><div class="prod-link">Ver producto →</div></a>
+      <a class="prod-card" href="https://mundomagico.com.co/products/patines-ajustables-para-ninas-con-kit-de-proteccion-4-llantas-y-linea" target="_blank"><span class="prod-girl">Solo si tienes niña</span><div class="prod-name">Patines para Niña con Kit de Protección</div><div class="prod-price">$115.000</div><div class="prod-age">Tallas 27 a 34</div><div class="prod-feat">Luces LED y kit completo de coderas, rodilleras y muñequeras.</div><div class="prod-link">Ver producto →</div></a>
+    </div>
+    <p class="legal-note">Los precios pueden cambiar. Confírmalos con nosotros antes de grabar. Solo menciona las características que aparecen aquí o en la página del producto.</p>
+  </div>
+
+  <div class="card-section">
+    <div class="card-tag">Mensajes clave</div>
+    <div class="card-title">Lo que sí o sí debe quedar claro</div>
+    <div class="frase-box permitida"><div class="frase-label">Pago</div>Pide hoy y paga en cuotas con Addi o Sistecrédito, sin tarjeta de crédito, o con cualquier medio de pago.</div>
+    <div class="frase-box permitida"><div class="frase-label">Envío</div>Envío gratis a toda Colombia desde $230.000.</div>
+    <div class="frase-box permitida"><div class="frase-label">Confianza</div>Más de 26 mil familias ya confían en Mundo Mágico.</div>
+    <div class="frase-box permitida"><div class="frase-label">Emoción</div>El regalo que lo hace saltar de emoción · Saca tu magia.</div>
+  </div>
+
+  <div class="card-section">
+    <div class="card-tag">Referencias</div>
+    <div class="card-title">Inspiración</div>
+    <div class="ref-list">
+      <span class="ref-pill"><a href="https://www.instagram.com/reel/Dc4i01aKja2/" target="_blank">Reel de referencia 1 ↗</a></span>
+      <span class="ref-pill"><a href="https://www.instagram.com/reel/DewniFEzZed/" target="_blank">Reel de referencia 2 ↗</a></span>
+      <span class="ref-pill"><a href="https://www.tiktok.com/@lapinatadetita" target="_blank">@lapinatadetita ↗</a></span>
+      <span class="ref-pill"><a href="https://www.tiktok.com/@gbi__store" target="_blank">@gbi__store ↗</a></span>
+      <span class="ref-pill"><a href="https://www.tiktok.com/@losadnmx/video/7639202846017146133" target="_blank">@losadnmx · video 1 ↗</a></span>
+      <span class="ref-pill"><a href="https://www.tiktok.com/@losadnmx/video/7359279671592193286" target="_blank">@losadnmx · video 2 ↗</a></span>
+      <span class="ref-pill"><a href="https://www.tiktok.com/@luckyeggofficial/video/7346273272578739489" target="_blank">@luckyeggofficial ↗</a></span>
+      <span class="ref-pill"><a href="https://www.tiktok.com/@saesiii" target="_blank">@saesiii ↗</a></span>
+    </div>
+  </div>
+
+  <div class="card-section">
+    <div class="card-tag">Tono de voz</div>
+    <div class="card-title">Cómo hablar</div>
+    <div class="tono-row">
+      <span class="tono-tag">Divertido</span>
+      <span class="tono-tag">Cercano</span>
+      <span class="tono-tag">Colombiano y natural</span>
+    </div>
+    <p class="body-text">Tutea y ve directo al beneficio. Habla como una mamá o un papá que le recomienda algo a otro, no como un comercial de televisión. Di los precios y las cuotas sin rodeos.</p>
+    <div class="frase-box permitida"><div class="frase-label">Frase que sí funciona</div>“Pídelo hoy y págalo en cuotas con Addi, sin tarjeta de crédito. Y el envío es gratis a toda Colombia desde $230.000.”</div>
+    <div class="frase-box prohibida"><div class="frase-label">Frase que NO debes decir</div>“Apártalo hoy”, “Págalo cuando llegue” o “Envío gratis” sin decir que es desde $230.000.</div>
+  </div>
+
+  <div class="card-section">
+    <div class="card-tag">Crítico</div>
+    <div class="card-title">Sí y no</div>
+    <div class="dd-grid">
+      <div class="dd-col si">
+        <div class="dd-title">Sí</div>
+        <div class="dd-item">Muestra el juguete funcionando, idealmente con tu hijo jugando de verdad.</div>
+        <div class="dd-item">Graba reacciones genuinas: la alegría real vende más que cualquier guion.</div>
+        <div class="dd-item">Casco y protección siempre en bicis, patines y scooters, y siempre con un adulto cerca.</div>
+        <div class="dd-item">Nombra la cuota y el medio de pago (Addi / Sistecrédito) tal como te lo confirmemos.</div>
+        <div class="dd-item">Graba en vertical, con buena luz y audio limpio, en tu casa real.</div>
+      </div>
+      <div class="dd-col no">
+        <div class="dd-title">No</div>
+        <div class="dd-item">No muestres niños en riesgo: sin casco, solos en la calle o sin supervisión.</div>
+        <div class="dd-item">No inventes precios, promociones, tiempos de entrega, garantías ni características (batería, autonomía, etc.).</div>
+        <div class="dd-item">No menciones fechas de entrega ni fechas especiales (Navidad, temporadas, etc.).</div>
+        <div class="dd-item">No llames el producto con marcas registradas (ej. no es una “Barbie” ni una pista “Hot Wheels”).</div>
+        <div class="dd-item">No fuerces a tu hijo a actuar ni muestres berrinches o llanto. Nada que adultice o sexualice a los niños.</div>
+      </div>
+    </div>
+    <div class="legal-note">Los niños que aparezcan en cámara deben ser tus hijos o contar con autorización de sus padres.</div>
+  </div>
+
+  <div class="card-section">
+    <div class="card-tag">El proceso</div>
+    <div class="card-title">Cómo funciona</div>
+    <div class="timeline">
+      <div class="tl-item"><div class="tl-num">1</div><div><div class="tl-date">Al firmar · 5 días hábiles</div><div class="tl-desc">Firmas el contrato y desde ese momento tienes 5 días hábiles para enviarnos tu contenido: el video editado + todo el material en crudo.</div></div></div>
+      <div class="tl-item"><div class="tl-num">2</div><div><div class="tl-date">48h feedback · 4 días ajustes</div><div class="tl-desc">Recibimos tu video y en un máximo de 48 horas hábiles te damos el feedback de parte de la agencia. Si hay ajustes, desde que recibes el feedback tienes 4 días hábiles para hacer las correcciones.</div></div></div>
+      <div class="tl-item"><div class="tl-num">3</div><div><div class="tl-date">2 días hábiles</div><div class="tl-desc">Presentamos tu contenido a Mundo Mágico para su revisión. La aprobación de la marca toma aproximadamente 2 días hábiles.</div></div></div>
+      <div class="tl-item"><div class="tl-num">4</div><div><div class="tl-date">Feedback de marca</div><div class="tl-desc">Si Mundo Mágico tiene algún comentario, te avisamos apenas lo recibamos y te pedimos las correcciones. La idea es que en este punto ya no quede nada pendiente.</div></div></div>
+      <div class="tl-item"><div class="tl-num">5</div><div><div class="tl-date">Aprobación</div><div class="tl-desc">Envías las correcciones si hacen falta y la marca aprueba tu contenido.</div></div></div>
+      <div class="tl-item"><div class="tl-num">6</div><div><div class="tl-date">Máx. 5 días hábiles</div><div class="tl-desc">Desde la aprobación final, te hacemos el pago en un máximo de 5 días hábiles.</div></div></div>
+    </div>
+  </div>
+
+  <div class="card-section">
+    <div class="card-tag">Entrega</div>
+    <div class="card-title">Cómo enviar tus videos</div>
+    <div class="entrega-box">
+      <p class="body-text" style="color:#94A3B8; margin-bottom:20px;">Debes entregar <strong style="color:#fff;">dos cosas por cada video</strong>: el video ya editado y listo para publicar, y todo el material en crudo (raw) que grabaste: tomas repetidas, ángulos extra, todo.</p>
+      <div class="entrega-sublabel">Carpeta de entrega</div>
+      <a href="https://drive.google.com/drive/folders/1MvglcoJMSSzHzZiCrGDU101Fe1VI6Onm" target="_blank" class="entrega-link">
+        <div class="entrega-link-icon">📁</div>
+        <div>
+          <div class="entrega-link-title">Abrir carpeta de Google Drive →</div>
+          <div class="entrega-link-sub">Sube aquí el video editado y el material en crudo</div>
+        </div>
+      </a>
+      <div class="entrega-sublabel">Nombra tus archivos así:</div>
+      <div class="entrega-files-box">
+        <span class="entrega-file-line">MUNDOMAGICO_T2_TuNombre_Angulo03_EDITADO.mp4</span>
+        <span class="entrega-file-line">MUNDOMAGICO_T2_TuNombre_Angulo03_CRUDO.zip</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="cta-band">
+    <div class="cta-band-title">¿Tienes dudas?</div>
+    <p class="cta-band-sub">Escríbenos y te ayudamos con lo que necesites</p>
+    <a href="https://wa.me/573178503145" target="_blank" class="cta-btn-whatsapp-big">
+      <svg viewBox="0 0 32 32" width="20" height="20" fill="white"><path d="M16 0C7.163 0 0 7.163 0 16c0 2.837.74 5.5 2.032 7.813L0 32l8.413-2.201A15.9 15.9 0 0016 32c8.837 0 16-7.163 16-16S24.837 0 16 0zm8.413 22.586c-.353.994-2.03 1.899-2.795 1.966-.716.063-1.617.09-2.606-.164-.601-.153-1.373-.401-2.367-.784-4.167-1.797-6.89-5.984-7.101-6.264-.211-.281-1.702-2.264-1.702-4.32s1.086-3.065 1.472-3.487c.386-.421.843-.526 1.124-.526.281 0 .562.003.807.015.259.012.607-.098.949.724.353.843 1.198 2.918 1.303 3.13.105.211.176.457.035.738-.14.281-.211.457-.421.703-.211.246-.444.55-.633.738-.211.211-.431.44-.185.862.246.421 1.093 1.803 2.346 2.921 1.612 1.437 2.972 1.883 3.393 2.094.421.211.667.176.913-.105.246-.281 1.056-1.232 1.337-1.654.281-.421.562-.351.949-.211.386.14 2.461 1.161 2.883 1.373.421.211.703.316.807.492.105.176.105 1.021-.248 2.015z"/></svg>
+      Escribir por WhatsApp
+    </a>
+  </div>
+
+  <footer>
+    <div class="foot-brand">LA REAL</div>
+    <div class="foot-contact">mafe@larealmarketing.com</div>
+  </footer>
+
+</div>
+</body>
+</html>
